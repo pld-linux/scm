@@ -1,0 +1,12 @@
+--- scm/Makefile.orig	2013-03-10 04:29:54.000000000 +0100
++++ scm/Makefile	2014-04-12 12:17:41.251970877 +0200
+@@ -619,9 +619,7 @@
+ 
+ install: install-man install-lib install-infoz installdirs
+ 	$(INSTALL_PROGRAM) scm scmlit $(DESTDIR)$(bindir)
+-	-strip $(DESTDIR)$(bindir)scmlit
+ 	$(INSTALL_DATA) scm.h scmfig.h scmflags.h $(DESTDIR)$(includedir)
+-	$(DESTDIR)$(bindir)scm -br new-catalog
+ 
+ uninstall:
+ 	$(PRE_UNINSTALL)     # Pre-uninstall commands follow.

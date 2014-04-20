@@ -1,0 +1,33 @@
+--- scm/Xlibscm.texi.orig	2009-03-21 05:45:22.000000000 +0100
++++ scm/Xlibscm.texi	2014-04-11 22:43:32.112989044 +0200
+@@ -37,7 +37,7 @@
+ 
+ @dircategory The Algorithmic Language Scheme
+ @direntry
+-* XlibScm: (XlibScm).   SCM Language X Interface.
++* XlibScm: (XlibScm).			SCM Language X Interface
+ @end direntry
+ 
+ @iftex
+--- scm/hobbit.texi.orig	2011-10-25 23:41:13.000000000 +0200
++++ scm/hobbit.texi	2014-04-11 22:43:55.582988556 +0200
+@@ -35,7 +35,7 @@
+ 
+ @dircategory The Algorithmic Language Scheme
+ @direntry
+-* hobbit: (hobbit).   SCM Compiler.
++* hobbit: (hobbit).			SCM Compiler
+ @end direntry
+ 
+ @iftex
+--- scm/scm.texi.orig	2011-11-24 18:39:03.000000000 +0100
++++ scm/scm.texi	2014-04-11 22:44:31.992987801 +0200
+@@ -30,7 +30,7 @@
+ 
+ @dircategory The Algorithmic Language Scheme
+ @direntry
+-* SCM: (scm).           A Scheme interpreter.
++* SCM: (scm).				A Scheme interpreter
+ @end direntry
+ 
+ @iftex

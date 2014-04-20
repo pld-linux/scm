@@ -1,0 +1,404 @@
+--- scm/scm.texi.orig	2014-04-12 22:49:42.834513806 +0200
++++ scm/scm.texi	2014-04-20 08:38:52.824504413 +0200
+@@ -1700,8 +1700,9 @@
+ @defun getenv name
+ Looks up @var{name}, a string, in the program environment.  If @var{name} is
+ found a string of its value is returned.  Otherwise, @code{#f} is returned.
++@end defun
+ 
+-@defunx getenv
++@defun getenv
+ Returns names and values of all the environment variables as an
+ association-list.
+ 
+@@ -1726,8 +1727,9 @@
+ The value of the environment variable @code{EDITOR} (or just @code{ed}
+ if it isn't defined) is invoked as a command with arguments @var{arg1}
+ @dots{}.
++@end defun
+ 
+-@defunx ed filename
++@defun ed filename
+ If SCM is compiled under VMS @code{ed} will invoke the editor with a
+ single the single argument @var{filename}.
+ @end defun
+@@ -1813,7 +1815,9 @@
+ 
+ @defmac trace proc1 @dots{}
+ Traces the top-level named procedures given as arguments.
+-@defmacx trace
++@end defmac
++
++@defmac trace
+ With no arguments, makes sure that all the currently traced identifiers
+ are traced (even if those identifiers have been redefined) and returns a
+ list of the traced identifiers.
+@@ -1821,7 +1825,9 @@
+ 
+ @defmac untrace proc1 @dots{}
+ Turns tracing off for its arguments.
+-@defmacx untrace
++@end defmac
++
++@defmac untrace
+ With no arguments, untraces all currently traced identifiers and returns
+ a list of these formerly traced identifiers.
+ @end defmac
+@@ -2284,8 +2290,9 @@
+ Returns the path (string) which SCM uses to find the executable file
+ whose invocation the currently running session is, or #f if the path is
+ not set.
++@end defun
+ 
+-@defunx execpath #f
++@defun execpath #f
+ @defunx execpath newpath
+ Sets the path to @code{#f} or @var{newpath}, respectively.  The old path
+ is returned.
+@@ -2599,10 +2606,10 @@
+ @itemx @code{exact->inexact}
+ @itemx @code{inexact->exact}
+ @xref{Numerical operations, , , r5rs, Revised(5) Scheme}.
+-@itemx @code{with-input-from-file}
++@item @code{with-input-from-file}
+ @itemx @code{with-output-to-file}
+ @xref{Ports, , , r5rs, Revised(5) Scheme}.
+-@itemx @code{load}
++@item @code{load}
+ @itemx @code{transcript-on}
+ @itemx @code{transcript-off}
+ @xref{System interface, , , r5rs, Revised(5) Scheme}.
+@@ -3008,8 +3015,9 @@
+ Returns the current position of the character in @var{port} which will
+ next be read or written.  If @var{port} is open to a non-file then
+ @code{#f} is returned.
++@end defun
+ 
+-@defunx file-position port k
++@defun file-position port k
+ Sets the current position in @var{port} which will next be read or
+ written.  If successful, @code{#f} is returned.  If @var{port} is open
+ to a non-file, then @code{file-position} returns @code{#f}.
+@@ -3399,8 +3407,9 @@
+ @defun comment string1 @dots{}
+ Appends @var{string1} @dots{} to the strings given as arguments to
+ previous calls @code{comment}.
++@end defun
+ 
+-@defunx comment
++@defun comment
+ Returns the (appended) strings given as arguments to previous calls
+ @code{comment} and empties the current string collection.
+ @end defun
+@@ -3423,8 +3432,9 @@
+ @code{#<unspecified>} in which case the expression will be treated as
+ whitespace.  @code{#<unspecified>} is the value returned by the
+ expression @code{(if #f #f)}.
++@end deffn
+ 
+-@deffnx {Callback procedure} load:sharp c port
++@deffn {Callback procedure} load:sharp c port
+ Dispatches like @code{read:sharp}, but only during @code{load}s.  The
+ read-syntaxes handled by @code{load:sharp} are a superset of those
+ handled by @code{read:sharp}.  @code{load:sharp} calls
+@@ -4818,12 +4828,14 @@
+ each file in @var{directory}.  The dynamic order in which @var{proc} is
+ applied to the filenames is unspecified.  The value returned by
+ @samp{directory-for-each} is unspecified.
++@end defun
+ 
+-@defunx directory-for-each proc directory pred
++@defun directory-for-each proc directory pred
+ Applies @var{proc} only to those filenames for which the procedure
+ @var{pred} returns a non-false value.
++@end defun
+ 
+-@defunx directory-for-each proc directory match
++@defun directory-for-each proc directory match
+ Applies @var{proc} only to those filenames for which
+ @code{(filename:match?? @var{match})} would return a non-false value
+ (@pxref{Filenames, , , slib, SLIB}).
+@@ -4959,8 +4971,9 @@
+ 
+ If successful, this procedure does not return.  Otherwise an error
+ message is printed and the integer @code{errno} is returned.
++@end defun
+ 
+-@defunx execv command arglist
++@defun execv command arglist
+ @defunx execvp command arglist
+ Like @code{execl} and @code{execlp} except that the set of arguments to
+ @var{command} is @var{arglist}.
+@@ -5239,8 +5252,9 @@
+ 
+ @defun setpwent #t
+ Rewinds the pw entry table back to the begining.
++@end defun
+ 
+-@defunx setpwent #f
++@defun setpwent #f
+ @defunx setpwent
+ Closes the pw table.
+ @end defun
+@@ -5267,8 +5281,9 @@
+ 
+ @defun setgrent #t
+ Rewinds the group entry table back to the begining.
++@end defun
+ 
+-@defunx setgrent #f
++@defun setgrent #f
+ @defunx setgrent
+ Closes the group table.
+ @end defun
+@@ -5553,8 +5568,9 @@
+ 
+ @defun line-editing
+ Returns the current edited line port or @code{#f}.
++@end defun
+ 
+-@defunx line-editing bool
++@defun line-editing bool
+ If @var{bool} is false, exits line-editing mode and returns the previous
+ value of @code{(line-editing)}.  If @var{bool} is true, sets the current
+ input and output ports to an edited line port and returns the previous
+@@ -6555,8 +6571,9 @@
+ @code{letrec}, @code{or}, @code{quote}, @code{set!}, @code{#f},
+ @code{#t}, @code{#<undefined>}, @code{#<eof>}, @code{()}, and
+ @code{#<unspecified>}.
++@end deftp
+ 
+-@deftpx {CAR Immediate} ispcsym
++@deftp {CAR Immediate} ispcsym
+ special symbols: syntax-checked versions of first 14 isyms
+ @end deftp
+ 
+@@ -6682,8 +6699,9 @@
+ 
+ @deftp Header tc7_ssymbol
+ static scheme symbol (part of initial system)
++@end deftp
+ 
+-@deftpx Header tc7_msymbol
++@deftp Header tc7_msymbol
+ @code{malloc}ed scheme symbol (can be GCed)
+ 
+ @defmac SYMBOLP x
+@@ -7754,8 +7772,9 @@
+ @code{deferred_proc} is set to non-zero, one of the global variables
+ @code{SIGINT_deferred} or @code{SIGALRM_deferred} is set to 1, and the
+ handler returns.
++@end defmac
+ 
+-@defmacx ALLOW_INTS
++@defmac ALLOW_INTS
+ Checks the deferred variables and if set the appropriate handler is
+ called.
+ 
+@@ -8339,8 +8358,9 @@
+ 
+ @code{scm_addr} is useful for performing C operations on strings or
+ other uniform arrays (@pxref{Uniform Array}).
++@end deftypefun
+ 
+-@deftypefunx unsigned long scm_base_addr(SCM @var{ra}, char *@var{s_name})
++@deftypefun unsigned long scm_base_addr(SCM @var{ra}, char *@var{s_name})
+ Returns a pointer (cast to an @code{unsigned long}) to the beginning
+ of storage of array @var{ra}.  Note that if @var{ra} is a
+ shared-array, the strorage accessed this way may be much larger than
+--- scm/Xlibscm.texi.orig	2014-04-20 09:17:36.657789313 +0200
++++ scm/Xlibscm.texi	2014-04-20 09:44:30.514422341 +0200
+@@ -257,8 +257,9 @@
+ Returns the root window for the specified @var{screen-number}.  Use
+ @code{x:root-window} for functions that need a drawable of a particular
+ screen or for creating top-level windows.
++@end defun
+ 
+-@defunx x:root-window window
++@defun x:root-window window
+ Returns the root window for the specified @var{window}'s screen.
+ @end defun
+ 
+@@ -345,7 +346,8 @@
+ 
+ @defun x:screen-depth display screen-number
+ Returns the depth of the root window of the specified screen.
+-@defunx x:screen-depth display
++@end defun
++@defun x:screen-depth display
+ @defunx x:screen-depth window
+ @defunx x:screen-depth visual
+ Returns the depth of argument.
+@@ -420,8 +422,9 @@
+ 
+ The returned window will have the attributes specified by
+ @var{field-name}s and @var{value}.
++@end defun
+ 
+-@defunx x:create-window window position size border-width border background
++@defun x:create-window window position size border-width border background
+ The returned window inherits its depth, class, and visual from its
+ parent.  All other window attributes, except @var{background} and
+ @var{border}, have their default values.
+@@ -909,7 +912,8 @@
+ @defun x:get-window-property window property 
+ Returns the (string or list of numbers) value of @var{property} of
+ @var{window}.
+-@defunx x:get-window-property window property #t
++@end defun
++@defun x:get-window-property window property #t
+ Removes and returns the (string or list of numbers) value of
+ @var{property} of @var{window}.
+ @end defun
+@@ -1392,8 +1396,9 @@
+ initial colors of a cursor are a black foreground and a white background
+ (see X:Recolor-Cursor).  The names of all cursor shapes are defined with
+ the prefix XC: in @file{x11.scm}.
++@end defun
+ 
+-@defunx x:create-cursor source-font source-char mask-font mask-char fgc bgc
++@defun x:create-cursor source-font source-char mask-font mask-char fgc bgc
+ Creates a cursor from the source and mask bitmaps obtained from the
+ specified font glyphs.  The integer @var{source-char} must be a defined
+ glyph in @var{source-font}.  The integer @var{mask-char} must be a
+@@ -1402,12 +1407,14 @@
+ hotspot.  The @var{source-char} and @var{mask-char} need not have the
+ same bounding box metrics, and there is no restriction on the placement
+ of the hotspot relative to the bounding boxes.
++@end defun
+ 
+-@defunx x:create-cursor source-font source-char #f #f fgc bgc
++@defun x:create-cursor source-font source-char #f #f fgc bgc
+ If @var{mask-font} and @var{mask-char} are #f, all pixels of the source
+ are displayed.
++@end defun
+ 
+-@defunx x:create-cursor source-pixmap mask-pixmap fgc bgc origin
++@defun x:create-cursor source-pixmap mask-pixmap fgc bgc origin
+ @var{mask-pixmap} must be the same size as the pixmap defined by the
+ @var{source-pixmap} argument.  The foreground and background RGB values
+ must be specified using @var{foreground-color} and
+@@ -1422,8 +1429,9 @@
+ @var{mask-pixmap} defines the shape of the cursor.  The pixels set to 1
+ in @var{mask-pixmap} define which source pixels are displayed, and the
+ pixels set to 0 define which pixels are ignored.
++@end defun
+ 
+-@defunx x:create-cursor source-pixmap #f fgc bgc origin
++@defun x:create-cursor source-pixmap #f fgc bgc origin
+ If @var{mask-pixmap} is #f, all pixels of the source are displayed.
+ @end defun
+ 
+@@ -1538,9 +1546,9 @@
+ @code{X:Alloc-Color-Cells} returns a list of two uniform arrays if it
+ succeeded or #f if it failed.  The first array has the pixels allocated
+ and the second has the plane-masks.
++@end defun
+ 
+-
+-@defunx x:alloc-colormap-cells colormap ncolors rgb
++@defun x:alloc-colormap-cells colormap ncolors rgb
+ @defunx x:alloc-colormap-cells colormap ncolors rgb contiguous?
+ 
+ The specified @var{ncolors} must be positive; and @var{rgb} a list or
+@@ -1596,8 +1604,9 @@
+ @var{rgb} is a list or vector of 3 integers, describing the red, green,
+ and blue intensities respectively; or an integer @samp{#x@i{rrggbb}},
+ packing red, green and blue intensities in the range 0 - 255.
++@end defun
+ 
+-@defunx x:colormap-find-color colormap color-name
++@defun x:colormap-find-color colormap color-name
+ 
+ The case-insensitive string @var{color_name} specifies the name of a
+ color (for example, @file{red})
+@@ -1630,8 +1639,9 @@
+ @var{rgb} is a list or vector of 3 integers, describing the red, green,
+ and blue intensities respectively; or an integer @samp{#x@i{rrggbb}},
+ packing red, green and blue intensities in the range 0 - 255.
++@end defun
+ 
+-@defunx X:Color-Set! colormap pixel color-name
++@defun X:Color-Set! colormap pixel color-name
+ 
+ The case-insensitive string @var{color_name} specifies the name of a
+ color (for example, @file{red})
+@@ -1671,8 +1681,9 @@
+ function because the output buffer is automatically flushed as needed by
+ calls to X:Pending, X:Next-Event, and X:Window-Event.  Events generated
+ by the server may be enqueued into the library's event queue.
++@end defun
+ 
+-@defunx x:flush gc
++@defun x:flush gc
+ Forces sending of GC component changes.
+ 
+ Xlib usually defers sending changes to the components of a GC to the
+@@ -1726,12 +1737,14 @@
+ 
+ @defun x:draw-points drawable gc position @dots{}
+ @var{Position} @dots{} specifies coordinates of the point to be drawn.
++@end defun
+ 
+-@defunx x:draw-points drawable gc x y @dots{}
++@defun x:draw-points drawable gc x y @dots{}
+ (@var{x}, @var{y}) @dots{} specifies coordinates of the point to be
+ drawn.
++@end defun
+ 
+-@defunx x:draw-points drawable gc point-array
++@defun x:draw-points drawable gc point-array
+ @var{point-array} is a uniform short array of rank 2, whose rightmost
+ index spans a range of 2.
+ 
+@@ -1748,12 +1761,14 @@
+ @defun x:draw-segments drawable gc pos1 pos2 @dots{}
+ @var{Pos1}, @var{pos2}, @dots{} specify coordinates to be connected by
+ segments.
++@end defun
+ 
+-@defunx x:draw-segments drawable gc x1 y1 x2 y2 @dots{}
++@defun x:draw-segments drawable gc x1 y1 x2 y2 @dots{}
+ (@var{x1}, @var{y1}), (@var{x2}, @var{y2}) @dots{} specify coordinates
+ to be connected by segments.
++@end defun
+ 
+-@defunx x:draw-segments drawable gc point-array
++@defun x:draw-segments drawable gc point-array
+ @var{point-array} is a uniform short array of rank 2, whose rightmost
+ index spans a range of 2.
+ 
+@@ -1779,12 +1794,14 @@
+ @defun x:draw-lines drawable gc pos1 pos2 @dots{}
+ @var{Pos1}, @var{pos2}, @dots{} specify coordinates to be connected by
+ lines.
++@end defun
+ 
+-@defunx x:draw-lines drawable gc x1 y1 x2 y2 @dots{}
++@defun x:draw-lines drawable gc x1 y1 x2 y2 @dots{}
+ (@var{x1}, @var{y1}), (@var{x2}, @var{y2}) @dots{} specify coordinates
+ to be connected by lines.
++@end defun
+ 
+-@defunx x:draw-lines drawable gc point-array
++@defun x:draw-lines drawable gc point-array
+ @var{point-array} is a uniform short array of rank 2, whose rightmost
+ index spans a range of 2.
+ 
+@@ -1810,12 +1827,14 @@
+ 
+ @defun x:fill-polygon drawable gc pos1 pos2 @dots{}
+ @var{Pos1}, @var{pos2}, @dots{} specify coordinates of the border path.
++@end defun
+ 
+-@defunx x:fill-polygon drawable gc x1 y1 x2 y2 @dots{}
++@defun x:fill-polygon drawable gc x1 y1 x2 y2 @dots{}
+ (@var{x1}, @var{y1}), (@var{x2}, @var{y2}) @dots{} specify coordinates
+ of the border path.
++@end defun
+ 
+-@defunx x:fill-polygon drawable gc point-array
++@defun x:fill-polygon drawable gc point-array
+ @var{point-array} is a uniform short array of rank 2, whose rightmost
+ index spans a range of 2.
+ 
