@@ -3,7 +3,7 @@ Summary:	Scheme implementation
 Summary(pl.UTF-8):	Implementacja Scheme
 Name:		scm
 Version:	5f1
-Release:	1
+Release:	2
 License:	LGPL v3+
 Group:		Development/Languages/Scheme
 Source0:	http://groups.csail.mit.edu/mac/ftpdir/scm/%{name}-%{version}.zip
@@ -16,7 +16,7 @@ Patch2:		%{name}-texinfo.patch
 URL:		http://people.csail.mit.edu/jaffer/SCM
 BuildRequires:	sed >= 4.0
 BuildRequires:	texinfo
-Requires:	slib >= %{slib_ver}
+Requires:	scm-slib >= %{slib_ver}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -64,6 +64,11 @@ rm -rf $RPM_BUILD_ROOT
 # let rpm autogenerate depecdencies
 chmod 755 $RPM_BUILD_ROOT%{_libdir}/scm/*.so
 
+# creation handled by (noarch) scm-slib package
+touch $RPM_BUILD_ROOT%{_libdir}/scm/slibcat
+# at least require[s].scm expects slib in ../slib relative to %{_libdir}/scm
+ln -sf ../share/slib $RPM_BUILD_ROOT%{_libdir}/slib
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -85,6 +90,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/scm/*.h
 %{_libdir}/scm/COPYING
 %{_libdir}/scm/COPYING.LESSER
+%ghost %{_libdir}/scm/slibcat
+%{_libdir}/slib
 %{_includedir}/scm.h
 %{_includedir}/scmfig.h
 %{_includedir}/scmflags.h
