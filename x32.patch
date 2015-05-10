@@ -1,0 +1,11 @@
+--- scm/scmfig.h~	2013-04-07 04:23:52.000000000 +0200
++++ scm/scmfig.h	2015-05-10 15:47:03.372887825 +0200
+@@ -260,7 +260,7 @@
+ # define SHORT_INT
+ # define CDR_DOUBLES
+ #endif
+-#ifdef __x86_64
++#if defined(__x86_64__) && !defined(__ILP32__)
+ # define SHORT_INT
+ # define CDR_DOUBLES
+ #endif
