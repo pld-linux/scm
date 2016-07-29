@@ -1,0 +1,46 @@
+--- scm/Makefile.orig	2016-07-29 17:01:47.090099218 +0200
++++ scm/Makefile	2016-07-29 17:20:44.712755102 +0200
+@@ -81,7 +81,7 @@
+ 
+ # directory where COPYING and InitXXX.scm reside.
+ #IMPLPATH = `pwd`/
+-IMPLPATH=$(srcdir)
++IMPLPATH=$(libscmdir)
+ include patchlvl.h
+ IMPLINIT = $(IMPLPATH)Init$(VERSION).scm
+ 
+@@ -390,6 +390,7 @@
+ scm4.opt:
+ 	echo "-F cautious bignums arrays inexact" >> scm4.opt
+ 	echo "-F engineering-notation dynamic-linking" >> scm4.opt
++	echo "--compiler-options=\"$(CFLAGS)\"" >> scm4.opt
+ #	if type gcc; then echo "--compiler-options=\"-fno-guess-branch-probability\"" >> scm4.opt; fi
+ scm4:	$(cfiles) $(hfiles) build.scm build scm4.opt
+ 	$(BUILD) -f scm4.opt -o scm -s $(IMPLPATH)
+@@ -401,6 +402,7 @@
+ 	echo "-F cautious bignums arrays inexact" >> scm5.opt
+ 	echo "-F engineering-notation dynamic-linking" >> scm5.opt
+ 	echo "-F macro" >> scm5.opt
++	echo "--compiler-options=\"$(CFLAGS)\"" >> scm5.opt
+ #	if type gcc; then echo "--compiler-options=\"-fno-guess-branch-probability\"" >> scm5.opt; fi
+ scm5:	$(cfiles) $(hfiles) build.scm build scm5.opt
+ 	$(BUILD) -f scm5.opt -o scm -s $(IMPLPATH)
+@@ -488,6 +490,7 @@
+ 	echo "-F cautious bignums arrays inexact" >> libscm.opt
+ 	echo "-F engineering-notation" >> libscm.opt
+ 	echo "-F dynamic-linking" >> libscm.opt
++	echo "--compiler-options=\"$(CFLAGS)\"" >> libscm.opt
+ libscm.a:	libscm.opt scm.h scmfig.h
+ 	$(BUILD) -t lib -f libscm.opt
+ libtest:	libscm.a libtest.c
+@@ -496,8 +499,8 @@
+ 
+ # DLLs for dynamic linking
+ dlls.opt:
+-	echo "--compiler-options=-Wall" >> dlls.opt
+-	echo "--linker-options=-Wall" >> dlls.opt
++	echo "--compiler-options=\"-Wall $(CFLAGS)\"" >> dlls.opt
++	echo "--linker-options=-Wall" >> dlls.opt
+ dlls:	dlls.opt
+ 	$(BUILD) -t dll -f dlls.opt -F rev2-procedures	#-c sc2.c
+ 	$(BUILD) -t dll -f dlls.opt -F byte	      	#-c byte.c

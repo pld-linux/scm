@@ -3,7 +3,7 @@ Summary:	Scheme implementation
 Summary(pl.UTF-8):	Implementacja Scheme
 Name:		scm
 Version:	5f2
-Release:	1
+Release:	2
 License:	LGPL v3+
 Group:		Development/Languages/Scheme
 Source0:	http://groups.csail.mit.edu/mac/ftpdir/scm/%{name}-%{version}.zip
@@ -15,6 +15,7 @@ Patch1:		%{name}-install.patch
 Patch2:		%{name}-texinfo.patch
 Patch3:		x32.patch
 Patch4:		%{name}-bigrecy.patch
+Patch5:		%{name}-make.patch
 URL:		http://people.csail.mit.edu/jaffer/SCM
 BuildRequires:	sed >= 4.0
 BuildRequires:	texinfo
@@ -38,10 +39,13 @@ IEEE P1178.
 %patch2 -p0
 %patch3 -p0
 %patch4 -p0
+%patch5 -p0
 
 ln -s slib-%{slib_ver} slib
 
 %{__sed} -i -e 's/install-lib install-infoz /install-lib install-info /' scm/Makefile
+
+%{__sed} -i -e 's,/lib/,/%{_lib}/,g' scm/{Link,build,mkimpcat}.scm
 
 %build
 cd scm
@@ -50,11 +54,18 @@ cd scm
 	--prefix=%{_prefix} \
 	--libdir=%{_libdir}
 
-%{__make} scm.info Xlibscm.info hobbit.info
+%{__make} -j1 scmflags
+# hack to avoid remaking scmflags.h
+touch scmflags
 
 %{__make} scmlit \
 	CC="%{__cc} %{rpmcflags}" \
 	LD="%{__cc} %{rpmldflags} %{rpmcflags}"
+
+# call just after making scmlit, before making scm
+# (requires built scmlit, but "make all" makes existing scmlit outdated to make)
+%{__make} -j1 scm.info Xlibscm.info hobbit.info
+
 %{__make} all \
 	CC="%{__cc} %{rpmcflags}" \
 	LD="%{__cc} %{rpmldflags} %{rpmcflags}"
