@@ -3,7 +3,7 @@ Summary:	Scheme implementation
 Summary(pl.UTF-8):	Implementacja Scheme
 Name:		scm
 Version:	5f3
-Release:	1
+Release:	2
 License:	LGPL v3+
 Group:		Development/Languages/Scheme
 Source0:	http://groups.csail.mit.edu/mac/ftpdir/scm/%{name}-%{version}.zip
