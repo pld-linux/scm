@@ -1,6 +1,6 @@
---- scm/Makefile.orig	2016-07-29 17:01:47.090099218 +0200
-+++ scm/Makefile	2016-07-29 17:20:44.712755102 +0200
-@@ -81,7 +81,7 @@
+--- scm/Makefile.orig	2024-02-21 22:02:48.673693936 +0100
++++ scm/Makefile	2024-02-21 22:05:47.916056230 +0100
+@@ -81,7 +81,7 @@ x11incdir=/usr/include/
  
  # directory where COPYING and InitXXX.scm reside.
  #IMPLPATH = `pwd`/
@@ -9,38 +9,53 @@
  include patchlvl.h
  IMPLINIT = $(IMPLPATH)Init$(VERSION).scm
  
-@@ -390,6 +390,7 @@
+@@ -345,6 +345,7 @@ scm:	$(SCMLIT)
  scm4.opt:
- 	echo "-F cautious bignums arrays inexact" >> scm4.opt
+ 	echo "-F cautious bignums arrays inexact" > scm4.opt
  	echo "-F engineering-notation dynamic-linking" >> scm4.opt
 +	echo "--compiler-options=\"$(CFLAGS)\"" >> scm4.opt
  #	if type gcc; then echo "--compiler-options=\"-fno-guess-branch-probability\"" >> scm4.opt; fi
  scm4:	$(cfiles) $(hfiles) build.scm build scm4.opt
  	$(BUILD) -f scm4.opt -o scm -s $(IMPLPATH)
-@@ -401,6 +402,7 @@
- 	echo "-F cautious bignums arrays inexact" >> scm5.opt
+@@ -356,7 +357,7 @@ scm5.opt:
+ 	echo "-F cautious bignums arrays inexact" > scm5.opt
  	echo "-F engineering-notation dynamic-linking" >> scm5.opt
  	echo "-F macro" >> scm5.opt
+-	echo "--compiler-options=\"-O1\"" >> scm5.opt
 +	echo "--compiler-options=\"$(CFLAGS)\"" >> scm5.opt
  #	if type gcc; then echo "--compiler-options=\"-fno-guess-branch-probability\"" >> scm5.opt; fi
  scm5:	$(cfiles) $(hfiles) build.scm build scm5.opt
  	$(BUILD) -f scm5.opt -o scm -s $(IMPLPATH)
-@@ -488,6 +490,7 @@
- 	echo "-F cautious bignums arrays inexact" >> libscm.opt
+@@ -372,6 +373,7 @@ udscm4.opt:
+ 	$(MAKE) scm4.opt
+ 	cat scm4.opt > udscm4.opt
+ 	echo "-F dump" >> udscm4.opt
++	echo "--compiler-options=\"$(CFLAGS)\"" >> udscm4.opt
+ #	if type gcc; then echo "--compiler-options=\"-fno-guess-branch-probability\"" >> udscm4.opt; fi
+ udscm4:	$(cfiles) $(hfiles) build.scm build udscm4.opt
+ 	$(BUILD) -f udscm4.opt -o udscm4 -s $(IMPLPATH)
+@@ -396,6 +398,7 @@ udscm5.opt:
+ 	$(MAKE) scm5.opt
+ 	cat scm5.opt > udscm5.opt
+ 	echo "-F dump" >> udscm5.opt
++	echo "--compiler-options=\"$(CFLAGS)\"" >> udscm5.opt
+ udscm5:	$(cfiles) $(ufiles) $(hfiles) build.scm build udscm5.opt
+ 	$(BUILD) -f udscm5.opt -o udscm5 -s $(IMPLPATH)
+ 	-rm $(ofiles) scmmain.o
+@@ -444,6 +447,7 @@ libscm.opt:
+ 	echo "-F cautious bignums arrays inexact" > libscm.opt
  	echo "-F engineering-notation" >> libscm.opt
  	echo "-F dynamic-linking" >> libscm.opt
 +	echo "--compiler-options=\"$(CFLAGS)\"" >> libscm.opt
  libscm.a:	libscm.opt scm.h scmfig.h
  	$(BUILD) -t lib -f libscm.opt
  libtest:	libscm.a libtest.c
-@@ -496,8 +499,8 @@
+@@ -452,7 +456,7 @@ libtest:	libscm.a libtest.c
  
  # DLLs for dynamic linking
  dlls.opt:
--	echo "--compiler-options=-Wall" >> dlls.opt
--	echo "--linker-options=-Wall" >> dlls.opt
+-	echo "--compiler-options=-Wall" > dlls.opt
 +	echo "--compiler-options=\"-Wall $(CFLAGS)\"" >> dlls.opt
-+	echo "--linker-options=-Wall" >> dlls.opt
+ 	echo "--linker-options=-Wall" >> dlls.opt
  dlls:	dlls.opt
  	$(BUILD) -t dll -f dlls.opt -F rev2-procedures	#-c sc2.c
- 	$(BUILD) -t dll -f dlls.opt -F byte	      	#-c byte.c

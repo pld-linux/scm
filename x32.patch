@@ -1,6 +1,6 @@
---- scm/scmfig.h~	2013-04-07 04:23:52.000000000 +0200
-+++ scm/scmfig.h	2015-05-10 15:47:03.372887825 +0200
-@@ -260,7 +260,7 @@
+--- scm/scmfig.h.orig	2024-02-21 21:40:25.197638836 +0100
++++ scm/scmfig.h	2024-02-21 21:49:25.254713096 +0100
+@@ -267,14 +267,14 @@ rgx.c	init_rgx();	regcomp and regexec. *
  # define SHORT_INT
  # define CDR_DOUBLES
  #endif
@@ -8,4 +8,12 @@
 +#if defined(__x86_64__) && !defined(__ILP32__)
  # define SHORT_INT
  # define CDR_DOUBLES
+ # ifdef __GNUC__                /* Includes gcc, clang, and llvm-gcc */
+ #  define SCM_LLONG __int128
+ # endif
  #endif
+-#ifdef _X86_                    /* Includes at least gcc on 32-bit platforms */
++#if defined(__i386__) || (defined(__x86_64__) && defined(__ILP32__))  /* Includes at least gcc on 32-bit platforms */
+ # ifdef __STDC_VERSION__  
+ #  if (__STDC_VERSION__ >= 199901L) /* ISO C99, has long long */
+ #   define SCM_LLONG long long
