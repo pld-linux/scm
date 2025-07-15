@@ -32,10 +32,10 @@ IEEE P1178.
 
 %prep
 %setup -q -c -a1
-%patch0 -p0
-%patch1 -p0
-%patch3 -p0
-%patch5 -p0
+%patch -P0 -p0
+%patch -P1 -p0
+%patch -P3 -p0
+%patch -P5 -p0
 
 ln -s slib-%{slib_ver} slib
 
