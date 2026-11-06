@@ -1,15 +1,15 @@
-%define	slib_ver	3c1
+%define	slib_ver	3c3
 Summary:	Scheme implementation
 Summary(pl.UTF-8):	Implementacja Scheme
 Name:		scm
-Version:	5f4
+Version:	5f6
 Release:	1
 License:	LGPL v3+
 Group:		Development/Languages/Scheme
 Source0:	http://groups.csail.mit.edu/mac/ftpdir/scm/%{name}-%{version}.zip
-# Source0-md5:	d16a55cb8f4c3e56e66d34a0eae908f3
+# Source0-md5:	c69b535fb785421ad4a5a7b194334ebb
 Source1:	http://groups.csail.mit.edu/mac/ftpdir/scm/slib-%{slib_ver}.tar.gz
-# Source1-md5:	dec6dddb3a966e5be609848c8d08b57b
+# Source1-md5:	6b9ecb2a8e09261b6a4143c852951119
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-install.patch
 Patch3:		x32.patch
